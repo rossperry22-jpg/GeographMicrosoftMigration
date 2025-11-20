@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geograph Technologies - Migration Launch Center</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --geograph-purple: #6a0dad;
+            --geograph-light-purple: #8a2be2;
+            --geograph-dark-purple: #4b0082;
+            --geograph-lavender: #e6e6fa;
+            --geograph-accent: #9370db;
+            --text-dark: #2d2d2d;
+            --text-light: #666666;
+            --border: #d8d8d8;
+            --shadow: 0 2px 8px rgba(106, 13, 173, 0.1);
+            --shadow-lg: 0 4px 12px rgba(106, 13, 173, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #f9f7fd;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--geograph-purple) 0%, var(--geograph-dark-purple) 100%);
+            color: white;
+            padding: 1.5rem 0;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            height: 50px;
+            width: auto;
+        }
+
+        .header-text h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .header-text p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .header-meta {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.5rem;
+        }
+
+        .last-updated, .version {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .main-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1rem;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Launch Banner */
+        .launch-banner {
+            background: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 6px solid var(--geograph-purple);
+            text-align: center;
+        }
+
+        .launch-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .launch-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--geograph-purple);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+        }
+
+        .launch-content h2 {
+            font-size: 1.8rem;
+            color: var(--geograph-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        .launch-content p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .countdown-item {
+            text-align: center;
+            padding: 1rem;
+            background: var(--geograph-lavender);
+            border-radius: 8px;
+            min-width: 100px;
+        }
+
+        .countdown-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--geograph-purple);
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--geograph-purple) 0%, var(--geograph-light-purple) 100%);
+            color: white;
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .card-header i {
+            font-size: 1.25rem;
+        }
+
+        .card-header h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .action-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.5rem;
+            background: var(--geograph-lavender);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--geograph-purple);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .action-btn:hover {
+            background: var(--geograph-accent);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .action-icon {
+            font-size: 2rem;
+        }
+
+        .action-text {
+            font-weight: 600;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--border);
+        }
+
+        .timeline-phase {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .timeline-phase:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .timeline-phase::before {
+            content: '';
+            position: absolute;
+            left: -2.2rem;
+            top: 0.5rem;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--geograph-purple);
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px var(--geograph-purple);
+        }
+
+        .timeline-phase.current::before {
+            background: var(--geograph-purple);
+            box-shadow: 0 0 0 2px var(--geograph-purple);
+            animation: pulse 2s infinite;
+        }
+
+        .timeline-phase.completed::before {
+            background: var(--geograph-accent);
+            box-shadow: 0 0 0 2px var(--geograph-accent);
+        }
+
+        .phase-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .phase-header h3 {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+        }
+
+        .phase-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .phase-status.completed {
+            background: #e6e6fa;
+            color: var(--geograph-purple);
+        }
+
+        .phase-status.current {
+            background: #d8bfd8;
+            color: var(--geograph-dark-purple);
+        }
+
+        .phase-status.upcoming {
+            background: #f3f2f1;
+            color: var(--text-light);
+        }
+
+        .phase-dates {
+            color: var(--geograph-purple);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .phase-tasks {
+            list-style: none;
+        }
+
+        .phase-tasks li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .phase-tasks li:before {
+            content: "•";
+            color: var(--geograph-purple);
+            font-weight: bold;
+        }
+
+        .phase-tasks li.completed {
+            color: var(--text-light);
+            text-decoration: line-through;
+        }
+
+        .phase-tasks li.current {
+            color: var(--geograph-purple);
+            font-weight: 600;
+        }
+
+        .phase-tasks li.upcoming {
+            color: var(--text-light);
+        }
+
+        /* Checklist */
+        .checklist {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.3s ease;
+        }
+
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+
+        .checklist-item:hover {
+            background: var(--geograph-lavender);
+        }
+
+        .checklist-item input[type="checkbox"] {
+            margin-top: 0.25rem;
+            width: 18px;
+            height: 18px;
+            accent-color: var(--geograph-purple);
+        }
+
+        .checklist-content {
+            flex: 1;
+        }
+
+        .checklist-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .checklist-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .checklist-priority {
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .priority-high {
+            background: #ffd6d6;
+            color: #a4262c;
+        }
+
+        .priority-medium {
+            background: #fff4ce;
+            color: #8a6800;
+        }
+
+        .priority-low {
+            background: #e6e6fa;
+            color: var(--geograph-purple);
+        }
+
+        /* Department Progress */
+        .dept-progress-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .dept-progress-card {
+            background: white;
+            border-radius: 6px;
+            padding: 1rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--geograph-purple);
+        }
+
+        .dept-progress-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .dept-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .dept-name {
+            font-weight: 600;
+        }
+
+        .dept-status {
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .status-ready {
+            background: #e6e6fa;
+            color: var(--geograph-purple);
+        }
+
+        .status-inprogress {
+            background: #d8bfd8;
+            color: var(--geograph-dark-purple);
+        }
+
+        .status-notready {
+            background: #ffd6d6;
+            color: #a4262c;
+        }
+
+        .dept-progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .dept-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--geograph-purple) 0%, var(--geograph-light-purple) 100%);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .dept-progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        /* Resources */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .resource-card {
+            background: white;
+            border-radius: 6px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--geograph-purple);
+            text-align: center;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .resource-icon {
+            font-size: 2.5rem;
+            color: var(--geograph-purple);
+            margin-bottom: 1rem;
+        }
+
+        .resource-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .resource-desc {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .resource-link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--geograph-purple);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+
+        .resource-link:hover {
+            background: var(--geograph-dark-purple);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--geograph-dark-purple);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer-content p {
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 0.7;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .main-nav {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .countdown {
+                flex-wrap: wrap;
+            }
+
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo-container">
+                    <div class="logo-placeholder">
+                        <i class="fas fa-mountain" style="font-size: 50px; color: white;"></i>
+                    </div>
+                    <div class="header-text">
+                        <h1>Geograph Technologies</h1>
+                        <p>Migration Launch Center</p>
+                    </div>
+                </div>
+                <div class="header-meta">
+                    <span class="last-updated">Today: November 19, 2025</span>
+                    <span class="version">Launch Version 1.0</span>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="#launch" class="nav-link active"><i class="fas fa-rocket"></i> Launch Status</a>
+                <a href="#timeline" class="nav-link"><i class="fas fa-road"></i> Migration Plan</a>
+                <a href="#checklists" class="nav-link"><i class="fas fa-tasks"></i> Getting Started</a>
+                <a href="#departments" class="nav-link"><i class="fas fa-building"></i> Department Schedule</a>
+                <a href="#resources" class="nav-link"><i class="fas fa-life-ring"></i> Resources</a>
+            </nav>
+        </header>
+
+        <!-- Launch Banner -->
+        <section class="launch-banner" id="launch">
+            <div class="launch-header">
+                <div class="launch-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <div class="launch-content">
+                    <h2>Migration Launch Underway!</h2>
+                    <p>We're beginning our transition from G Suite to Microsoft 365. Target completion: January 31, 2026.</p>
+                    <div class="countdown">
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="days">73</div>
+                            <div class="countdown-label">Days Remaining</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="departments">0</div>
+                            <div class="countdown-label">Departments Started</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-value" id="users">0</div>
+                            <div class="countdown-label">Users Migrated</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Actions -->
+        <section class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <i class="fas fa-bolt"></i>
+                <h3>Quick Start Actions</h3>
+            </div>
+            <div class="card-content">
+                <div class="quick-actions">
+                    <a href="#" class="action-btn">
+                        <div class="action-icon">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <div class="action-text">Prepare Your Account</div>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <div class="action-icon">
+                            <i class="fas fa-trash-alt"></i>
+                        </div>
+                        <div class="action-text">Clean Up Google Drive</div>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <div class="action-icon">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <div class="action-text">Install Microsoft Teams</div>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <div class="action-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="action-text">Watch Training Videos</div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Timeline -->
+        <section class="card" id="timeline" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <i class="fas fa-road"></i>
+                <h3>Migration Timeline (Nov 2025 - Jan 2026)</h3>
+            </div>
+            <div class="card-content">
+                <div class="timeline">
+                    <div class="timeline-phase current">
+                        <div class="phase-header">
+                            <h3>Phase 1: Launch & IT Pilot</h3>
+                            <span class="phase-status current">Starting Now</span>
+                        </div>
+                        <div class="phase-dates">November 19 - December 15, 2025</div>
+                        <ul class="phase-tasks">
+                            <li class="current">IT Department pilot migration</li>
+                            <li class="current">Finalize migration procedures</li>
+                            <li class="upcoming">User communication and training</li>
+                            <li class="upcoming">Department readiness assessments</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-phase upcoming">
+                        <div class="phase-header">
+                            <h3>Phase 2: Department Rollouts</h3>
+                            <span class="phase-status upcoming">Starting Dec 16</span>
+                        </div>
+                        <div class="phase-dates">December 16, 2025 - January 15, 2026</div>
+                        <ul class="phase-tasks">
+                            <li class="upcoming">Finance & HR Departments (Week of Dec 16)</li>
+                            <li class="upcoming">Marketing & Sales (Week of Jan 6)</li>
+                            <li class="upcoming">Engineering (Week of Jan 13)</li>
+                            <li class="upcoming">Customer Support & Operations (Week of Jan 20)</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-phase upcoming">
+                        <div class="phase-header">
+                            <h3>Phase 3: Completion & Optimization</h3>
+                            <span class="phase-status upcoming">Starting Jan 16</span>
+                        </div>
+                        <div class="phase-dates">January 16 - January 31, 2026</div>
+                        <ul class="phase-tasks">
+                            <li class="upcoming">Final user migrations</li>
+                            <li class="upcoming">Data validation and cleanup</li>
+                            <li class="upcoming">Decommission Google Workspace</li>
+                            <li class="upcoming">Post-migration support and training</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Getting Started Checklists -->
+        <section class="card" id="checklists" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <i class="fas fa-tasks"></i>
+                <h3>Getting Started Checklist</h3>
+            </div>
+            <div class="card-content">
+                <div class="checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check1">
+                        <div class="checklist-content">
+                            <div class="checklist-title">Review your migration schedule</div>
+                            <div class="checklist-meta">
+                                <span>Due: Before your department's migration week</span>
+                                <span class="checklist-priority priority-high">High Priority</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check2">
+                        <div class="checklist-content">
+                            <div class="checklist-title">Clean up your Google Drive files</div>
+                            <div class="checklist-meta">
+                                <span>Due: 1 week before migration</span>
+                                <span class="checklist-priority priority-high">High Priority</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check3">
+                        <div class="checklist-content">
+                            <div class="checklist-title">Install Microsoft Teams on your devices</div>
+                            <div class="checklist-meta">
+                                <span>Due: Before migration</span>
+                                <span class="checklist-priority priority-medium">Medium Priority</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check4">
+                        <div class="checklist-content">
+                            <div class="checklist-title">Complete Microsoft 365 training</div>
+                            <div class="checklist-meta">
+                                <span>Due: Before migration</span>
+                                <span class="checklist-priority priority-medium">Medium Priority</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check5">
+                        <div class="checklist-content">
+                            <div class="checklist-title">Identify critical files and bookmarks</div>
+                            <div class="checklist-meta">
+                                <span>Due: Before migration</span>
+                                <span class="checklist-priority priority-medium">Medium Priority</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check6">
+                        <div class="checklist-content">
+                            <div class="checklist-title">Update your email signature</div>
+                            <div class="checklist-meta">
+                                <span>Due: After migration</span>
+                                <span class="checklist-priority priority-low">Low Priority</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Department Schedule -->
+        <section class="card" id="departments" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <i class="fas fa-building"></i>
+                <h3>Department Migration Schedule</h3>
+            </div>
+            <div class="card-content">
+                <p>Your department lead will provide specific dates and instructions for your team.</p>
+                <div class="dept-progress-grid" style="margin-top: 1.5rem;">
+                    <div class="dept-progress-card">
+                        <div class="dept-header">
+                            <div class="dept-name">IT Department</div>
+                            <div class="dept-status status-inprogress">In Progress</div>
+                        </div>
+                        <div class="dept-progress-bar">
+                            <div class="dept-progress-fill" style="width: 15%"></div>
+                        </div>
+                        <div class="dept-progress-text">
+                            <span>Week of Nov 19</span>
+                            <span>Pilot Group</span>
+                        </div>
+                    </div>
+                    <div class="dept-progress-card">
+                        <div class="dept-header">
+                            <div class="dept-name">Finance</div>
+                            <div class="dept-status status-notready">Scheduled</div>
+                        </div>
+                        <div class="dept-progress-bar">
+                            <div class="dept-progress-fill" style="width: 0%"></div>
+                        </div>
+                        <div class="dept-progress-text">
+                            <span>Week of Dec 16</span>
+                            <span>Not Started</span>
+                        </div>
+                    </div>
+                    <div class="dept-progress-card">
+                        <div class="dept-header">
+                            <div class="dept-name">HR</div>
+                            <div class="dept-status status-notready">Scheduled</div>
+                        </div>
+                        <div class="dept-progress-bar">
+                            <div class="dept-progress-fill" style="width: 0%"></div>
+                        </div>
+                        <div class="dept-progress-text">
+                            <span>Week of Dec 16</span>
+                            <span>Not Started</span>
+                        </div>
+                    </div>
+                    <div class="dept-progress-card">
+                        <div class="dept-header">
+                            <div class="dept-name">Marketing</div>
+                            <div class="dept-status status-notready">Scheduled</div>
+                        </div>
+                        <div class="dept-progress-bar">
+                            <div class="dept-progress-fill" style="width: 0%"></div>
+                        </div>
+                        <div class="dept-progress-text">
+                            <span>Week of Jan 6</span>
+                            <span>Not Started</span>
+                        </div>
+                    </div>
+                    <div class="dept-progress-card">
+                        <div class="dept-header">
+                            <div class="dept-name">Engineering</div>
+                            <div class="dept-status status-notready">Scheduled</div>
+                        </div>
+                        <div class="dept-progress-bar">
+                            <div class="dept-progress-fill" style="width: 0%"></div>
+                        </div>
+                        <div class="dept-progress-text">
+                            <span>Week of Jan 13</span>
+                            <span>Not Started</span>
+                        </div>
+                    </div>
+                    <div class="dept-progress-card">
+                        <div class="dept-header">
+                            <div class="dept-name">Support & Operations</div>
+                            <div class="dept-status status-notready">Scheduled</div>
+                        </div>
+                        <div class="dept-progress-bar">
+                            <div class="dept-progress-fill" style="width: 0%"></div>
+                        </div>
+                        <div class="dept-progress-text">
+                            <span>Week of Jan 20</span>
+                            <span>Not Started</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources -->
+        <section class="card" id="resources" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <i class="fas fa-life-ring"></i>
+                <h3>Migration Resources & Support</h3>
+            </div>
+            <div class="card-content">
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-film"></i>
+                        </div>
+                        <div class="resource-title">Training Videos</div>
+                        <div class="resource-desc">Short videos showing how to use Microsoft Teams, Outlook, and more</div>
+                        <a href="#" class="resource-link">Watch Now</a>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <div class="resource-title">Quick Start Guides</div>
+                        <div class="resource-desc">PDF guides for common tasks in Microsoft 365</div>
+                        <a href="#" class="resource-link">Download</a>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <div class="resource-title">Migration Support</div>
+                        <div class="resource-desc">Get help with migration issues or questions</div>
+                        <a href="#" class="resource-link">Contact Support</a>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="resource-title">FAQ & Community</div>
+                        <div class="resource-desc">Common questions and answers from other users</div>
+                        <a href="#" class="resource-link">Browse FAQ</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>&copy; 2025 Geograph Technologies. Migration Launch Center</p>
+                <p>Need help? Contact the IT Migration Team at migration-support@geograph.com</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Set current date
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-US', {
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric'
+        });
+
+        // Calculate days remaining until January 31, 2026
+        const targetDate = new Date('January 31, 2026').getTime();
+        const now = new Date().getTime();
+        const daysRemaining = Math.ceil((targetDate - now) / (1000 * 60 * 60 * 24));
+        document.getElementById('days').textContent = daysRemaining;
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all links
+                document.querySelectorAll('.nav-link').forEach(nav => nav.classList.remove('active'));
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                // Scroll to section
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add animation to elements when they come into view
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections for animation
+        document.querySelectorAll('.card').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Checklist functionality
+        document.querySelectorAll('.checklist-item input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const checklistItem = this.closest('.checklist-item');
+                if (this.checked) {
+                    checklistItem.style.opacity = '0.7';
+                    // Update progress counters
+                    updateProgressCounters();
+                } else {
+                    checklistItem.style.opacity = '1';
+                    updateProgressCounters();
+                }
+            });
+        });
+
+        // Initialize progress bars with animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBars = document.querySelectorAll('.dept-progress-fill');
+            progressBars.forEach(bar => {
+                const targetWidth = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = targetWidth;
+                }, 500);
+            });
+        });
+
+        // Simulate progress updates
+        function updateProgressCounters() {
+            const checkedItems = document.querySelectorAll('.checklist-item input[type="checkbox"]:checked').length;
+            const totalItems = document.querySelectorAll('.checklist-item input[type="checkbox"]').length;
+            
+            // Update users migrated (simulated)
+            if (checkedItems > 0) {
+                document.getElementById('users').textContent = Math.min(checkedItems * 3, 24);
+            }
+            
+            // Update departments started (simulated)
+            if (checkedItems >= 2) {
+                document.getElementById('departments').textContent = 1;
+            }
+        }
+
+        // Simulate IT department progress
+        let itProgress = 15;
+        const itProgressBar = document.querySelector('.dept-progress-card:first-child .dept-progress-fill');
+        
+        function simulateProgress() {
+            if (itProgress < 100) {
+                itProgress += Math.random() * 5;
+                itProgress = Math.min(itProgress, 100);
+                itProgressBar.style.width = itProgress + '%';
+                
+                // Update department status text
+                const progressText = document.querySelector('.dept-progress-card:first-child .dept-progress-text span:last-child');
+                if (progressText) {
+                    if (itProgress < 50) {
+                        progressText.textContent = 'In Progress';
+                    } else if (itProgress < 100) {
+                        progressText.textContent = 'Mostly Complete';
+                    } else {
+                        progressText.textContent = 'Complete';
+                    }
+                }
+            }
+        }
+
+        // Update progress every 30 seconds
+        setInterval(simulateProgress, 30000);
+    </script>
+</body>
+</html>
